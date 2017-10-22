@@ -29,5 +29,5 @@ do
 	# Create the new name, removing - symbols and replaceing spcaes with _
 	newname=$(echo $(basename $file) | tr " " "_" | tr -d "\-")
 	echo "Removing header from $file and copying to $OUTPUT_HDFS_FOLDER/$newname"
-	tail -n +2 $file | hadoop fs -put - $OUTPUT_HDFS_FOLDER/$newname
+	tail -n +2 $file | hdfs dfs -put - $OUTPUT_HDFS_FOLDER/$newname
 done

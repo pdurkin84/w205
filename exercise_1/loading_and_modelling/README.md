@@ -4,8 +4,8 @@ There are four sections here.
 3. The details.  An overview of what the script does
 4. Help output of the script
 
-================================================================================
-The Gist:
+
+###The Gist:
 =========
 To easily run this have the following:
 	- CSV files readable in /data/Exercise1

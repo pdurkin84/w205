@@ -5,7 +5,7 @@ There are four sections here.
 4. Help output of the script
 
 
-###The Gist:
+The Gist:
 =========
 To easily run this have the following:
 	- CSV files readable in /data/Exercise1

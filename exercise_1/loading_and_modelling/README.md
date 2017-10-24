@@ -4,7 +4,7 @@ There are four sections here.
 3. The details.  An overview of what the script does
 4. Help output of the script
 
-================================================================================
+
 The Gist:
 =========
 To easily run this have the following:
@@ -27,7 +27,7 @@ If any variation is required see the details below or run "load_data_lake.sh -?"
 
 NOTE: the hive_base_ddl.sql script is not manually created but an automated output
 
-================================================================================
+
 Implementation:
 ==============
 
@@ -42,7 +42,7 @@ instead have implemented a function to rename this ("one", "two" and so on) but
 decided it wasn't worth the time for this implementation.  A more thorough sanity
 check of both the table and column names would be necessary for completeness
 
-================================================================================
+
 The Details:
 ============
 The load_data_lake.sh is quite complex.  It does the following but many of these
@@ -61,12 +61,12 @@ options and the file and directory defaults can be overridden
 - On success it can (with the -L option) load the SQL file into hive and create the
 	database schema for the copied files.
 
-================================================================================
+
 Help output of script:
 =======================
 Usage:: load_data_lake.sh [-h] [-q] [-v] [-s] [-n] [-L] [-l logfile] [-i inputdirectory] [-d destinationdirectory] [-o outputScript]
-                 -h              Display the help and exit
-                 -q              Quiet, no logging to file
+		 -h              Display the help and exit
+		 -q              Quiet, no logging to file
                  -v              Verbose, write all logs to the terminal.  If used with -q only writes to the terminal
                  -s              SQL Script only, do not copy files to data lake
                  -n              Indicates that no header line is expected in the CSV files, implies -s

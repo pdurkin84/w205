@@ -65,8 +65,8 @@ options and the file and directory defaults can be overridden
 Help output of script:
 =======================
 Usage:: load_data_lake.sh [-h] [-q] [-v] [-s] [-n] [-L] [-l logfile] [-i inputdirectory] [-d destinationdirectory] [-o outputScript]
-                 -h              Display the help and exit
-                 -q              Quiet, no logging to file
+	-h              Display the help and exit
+	-q              Quiet, no logging to file
                  -v              Verbose, write all logs to the terminal.  If used with -q only writes to the terminal
                  -s              SQL Script only, do not copy files to data lake
                  -n              Indicates that no header line is expected in the CSV files, implies -s

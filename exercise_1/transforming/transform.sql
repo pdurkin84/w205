@@ -30,7 +30,8 @@ create table if not exists Survey as select
 	cast(regexp_extract(overallratingofhospitalimprovementpoints,'(.*?) out of.*',1) as int) as overallratingofhospitalimprovementpoints,
 	cast(regexp_extract(overallratingofhospitaldimensionscore,'(.*?) out of.*',1) as int) as overallratingofhospitaldimensionscore,
 	cast(hcahpsbasescore as int) as hcahpsbasescore,
-	cast(hcahpsconsistencyscore as int) as hcahpsconsistencyscore
+	cast(hcahpsconsistencyscore as int) as hcahpsconsistencyscore,
+	(hcahpsbasescore + hcahpsconsistencyscore) as PatientExperienceOfCareDomain
 from hvbp_hcahps_05_28_2015;
 
 create table if not exists Procedures as select MeasureName, MeasureID from measuredates;

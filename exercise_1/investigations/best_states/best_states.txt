@@ -1,0 +1,31 @@
+The Question:
+-------------
+What states are models of high quality care?
+
+The Understanding:
+------------------
+From this question I understand the following:
+- This time we are not concerned about how many procedures per hospital, we
+  want to aggregate all the scores for the state and get the average of them
+
+The results are :
+
+State			Mean Score				Total Score				Number of Procedures
+Utah		    93.55263635193907       104685.40007781982      1119
+Maine   		93.47789172272184       100208.29992675781      1072
+Virginia        93.4268575124167        290464.1000061035       3109
+Delaware        93.2531915488818        26297.400016784668      282
+Colorado        93.1506179228786        188443.7000579834       2023
+Connecticut     93.14300896433271       113913.8999633789       1223
+New Hampshire   93.14247254613272       76097.40007019043       817
+North Carolina  93.11898994396655       361394.7999725342       3881
+South Carolina  93.08510351996503       206835.1000213623       2222
+Massachusetts   93.06845412396166       222154.39999389648      2387
+
+Utah has the highest mean score of all the states and has 1119 score records
+
+Some other observations:
+- The scores for each state are within a very small range, ignoring the
+  outliers the range was between 86% and 93.5%.
+  - To verify this I checked the average score in the procedures and
+	discovered that it is 92%

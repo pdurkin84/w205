@@ -17,7 +17,7 @@ create table ProcedureScores (providerid    STRING,
      measureid  STRING,
      score  FLOAT);
 
-INSERT INTO ProcedureScores SELECT providerid, measureid
+INSERT INTO ProcedureScores SELECT providerid, measureid,
         if (measureid = "VTE_6" OR
             measureid = "MORT_30_PN" OR
             measureid = "PC_01" OR
@@ -35,7 +35,7 @@ INSERT INTO ProcedureScores SELECT providerid, measureid
             measureid = "READM_30_AMI" OR
             measureid = "READM_30_HOSP_WIDE",
                 100-cast(score as float), cast(score as float)
-            ) as score,
+            ) as score
             from readmissionsanddeathshospital where score != "Not Available";
 
 INSERT INTO ProcedureScores SELECT providerid, measureid,

@@ -1,8 +1,11 @@
 -- No changes necessary to the Hospitals information
 create table if not exists Hospitals as select * from hospitalgeneralinformation;
 
+-- The procedures are simply the measure name and measure id, we do not need the other fields from the measuredates
+create table if not exists Procedures as select MeasureName, MeasureID from measuredates;
 
--- Load the Survey table removing all the (out of 9 and out of 10 for the scores) and converting them to integers
+-- Load the Survey table removing all the "out of 9" and "out of 10" leaving just the scores
+-- Also some aggregate columns
 create table if not exists Survey as select
 	providernumber as providerid,
 	cast(regexp_extract(communicationwithnursesachievementpoints,'(.*?) out of.*',1) as int) as communicationwithnursesachievementpoints,
@@ -31,19 +34,16 @@ create table if not exists Survey as select
 	cast(regexp_extract(overallratingofhospitaldimensionscore,'(.*?) out of.*',1) as int) as overallratingofhospitaldimensionscore,
 	cast(hcahpsbasescore as int) as hcahpsbasescore,
 	cast(hcahpsconsistencyscore as int) as hcahpsconsistencyscore,
+	-- May be useful as a comparison against the mean scores for the hospital
+	hcahpsbasescore/80 as hcahpsbasescoremean,
 	(hcahpsbasescore + hcahpsconsistencyscore) as PatientExperienceOfCareDomain
 from hvbp_hcahps_05_28_2015;
 
-create table if not exists Procedures as select MeasureName, MeasureID from measuredates;
-
-CREATE TABLE IF NOT EXISTS ReadmissionsAndRegularCare COMBINED AS
-select * from
-
-create table ReadmissionsAndRegularCare (providerid	STRING,
+create table ProcedureScores (providerid	STRING,
 	 measureid	STRING,
 	 score	FLOAT);
 
-INSERT INTO ReadmissionsAndRegularCare SELECT providerid, measureid
+INSERT INTO ProcedureScores SELECT providerid, measureid
 		if (measureid = "VTE_6" OR
 			measureid = "MORT_30_PN" OR
             measureid = "PC_01" OR
@@ -74,7 +74,7 @@ INSERT INTO ReadmissionsAndRegularCare SELECT providerid, measureid
 --	- Convert a number of scores from being "lower is better" to "higher is better" by subtracting
 --		them from 100
 
-INSERT INTO ReadmissionsAndRegularCare SELECT providerid, measureid,
+INSERT INTO ProcedureScores SELECT providerid, measureid,
         if (measureid = "VTE_6" OR
             measureid = "MORT_30_PN" OR
             measureid = "PC_01" OR
@@ -91,6 +91,7 @@ INSERT INTO ReadmissionsAndRegularCare SELECT providerid, measureid,
             measureid = "READM_30_CABG" OR
             measureid = "READM_30_AMI" OR
             measureid = "READM_30_HOSP_WIDE",
+				-- Either invert it by subtracting it from 100 or take the score as is (converting to integer)
                 100-cast(score as float), cast(score as float)
             ) as score
             from timelyandeffectivecarehospital where score != "Not Available" and measureid != "EDV"
@@ -98,8 +99,14 @@ INSERT INTO ReadmissionsAndRegularCare SELECT providerid, measureid,
 			and measureid != "OP_20" and measureid != "OP_21" and measureid != "OP_3b" 
 			and measureid != "OP_5" and measureid != "EDV" and measureid != "OP_22" and measureid != "ED_2b";
 
-create table hospitalScores as select avg(score) as mean,sum(score) as totalscore, max(score) as maximum, min(score) as minimum,count(score) as numprocedures, max(score)-min(score) as range, providerid from ReadmissionsAndRegularCare where ReadmissionsAndRegularCare.measureid in (select regularproceduresPerc.measureid from regularproceduresPerc) group by providerid;
-
+-- This table does all the aggregations across the procedure measures (ProcedureScores table) for each hospital.
+-- Once created this table can be used for checking:
+--	- Mean score for each hospital
+-- 	- Total score for each hospital
+-- 	- Maximum score achieved by each hospital
+--	- Minimum score achieved by each hospital
+--	- 
+create table hospitalScores as select avg(score) as mean,sum(score) as totalscore, max(score) as maximum, min(score) as minimum,count(score) as numprocedures, max(score)-min(score) as range, providerid from ProcedureScores where ProcedureScores.measureid in (select regularproceduresPerc.measureid from regularproceduresPerc) group by providerid;
 
 -- This table is unnecessary for the results but was heavily used during analysis
 create table if not exists Readmissions as select 
@@ -125,7 +132,7 @@ create table if not exists RegularCare as select
 
 -- Create a table storing the details for procedures measured in percentages
 -- This tables is for procedures that are based on percentages.  We remove the following:
-create table regularproceduresPerc as select distinct(ReadmissionsAndRegularCare.measureid),procedures.measurename from ReadmissionsAndRegularCare join Procedures on ReadmissionsAndRegularCare.measureid = procedures.measureid;
+create table regularproceduresPerc as select distinct(ProcedureScores.measureid),procedures.measurename from ProcedureScores join Procedures on ProcedureScores.measureid = procedures.measureid;
 
 -- -- Create a table storing the details for readmissions procedures that are based on Percentages
 -- create table readmissionprocedures as select distinct(readmissions.measureid),procedures.measurename from readmissions join Procedures on readmissions.measureid = procedures.measureid;

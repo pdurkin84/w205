@@ -3,13 +3,13 @@
 THIS_SCRIPT=$(basename $0)
 LOG_FILE="$HOME/${THIS_SCRIPT}.log"
 QUIET="N"
-VERBOSE="N"
+VERBOSE="Y"
 DDL_SCRIPT_ONLY="N"
 NO_HEADERS="N"
 INPUT_FOLDER=/data/Exercise1
 OUTPUT_HDFS_FOLDER=/user/w205/hospital_compare
-OUTPUT_SQL_SCRIPT="$HOME/github/w205/exercise_1/loading_and_modelling/hive_base_ddl.sql"
-LOAD_HIVE_SCHEMA="N"
+OUTPUT_SQL_SCRIPT="$HOME/hive_base_ddl.sql"
+LOAD_HIVE_SCHEMA="Y"
 OLDIFS=$IFS
 
 ################################################################################

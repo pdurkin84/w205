@@ -17,12 +17,9 @@ create table if not exists Survey as select
     cast(regexp_extract(communicationaboutmedicinesachievementpoints,'(.*?) out of.*',1) as int) as communicationaboutmedicinesachievementpoints,
     cast(regexp_extract(communicationaboutmedicinesimprovementpoints,'(.*?) out of.*',1) as int) as communicationaboutmedicinesimprovementpoints,
     cast(regexp_extract(communicationaboutmedicinesdimensionscore,'(.*?) out of.*',1) as int) as communicationaboutmedicinesdimensionscore,
-    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentachievementpoints,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentach
-ievementpoints,
-    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentimprovementpoints,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentimp
-rovementpoints,
-    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentdimensionscore,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentdimens
-ionscore,
+    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentachievementpoints,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentachievementpoints,
+    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentimprovementpoints,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentimprovementpoints,
+    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentdimensionscore,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentdimensionscore,
     cast(regexp_extract(dischargeinformationachievementpoints,'(.*?) out of.*',1) as int) as dischargeinformationachievementpoints,
     cast(regexp_extract(dischargeinformationimprovementpoints,'(.*?) out of.*',1) as int) as dischargeinformationimprovementpoints,
     cast(regexp_extract(dischargeinformationdimensionscore,'(.*?) out of.*',1) as int) as dischargeinformationdimensionscore,

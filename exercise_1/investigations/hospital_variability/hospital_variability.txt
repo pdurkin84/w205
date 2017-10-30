@@ -1,0 +1,64 @@
+The Question:
+-------------
+Which procedures have the greatest variability between hospitals?
+
+The Understanding:
+------------------
+From this question I understand the following: We are being asked to find 
+which procedures have the greatest variablility.  Since the procedures 
+happen at hospitals and there is at most one score for each procedure
+per-hospital, between hospitals is implied.
+We are looking in this case for the largest range of values for particular
+procedures.
+The query in this case is to calculate the difference between the maximum and
+minimum values for a procedure (independent of hospitals) and find the top 10
+with the biggest range
+
+The results are :
+Where the range column is the difference between the maximum score and the
+minimum score.
+
+Range	Maximum	Minimum	procedure	Procedure description
+100.0   100.0   0.0     STK_8   Stroke Education
+100.0   100.0   0.0     VTE_1   Venous Thromboembolism Prophylaxis
+100.0   100.0   0.0     VTE_2   Intensive Care Unit Venous Thromboembolism Prophylaxis
+100.0   100.0   0.0     IMM_2   Influenza Immunization
+100.0   100.0   0.0     HF_2    Evaluation of LVS Function
+100.0   100.0   0.0     OP_23   Head CT Scan Results for Acute Ischemic Stroke or Hemorrhagic Stroke Patients who Received Head CT or MRI Scan Interpretation Within 45 Minutes of ED Arrival
+100.0   100.0   0.0     PC_01   Elective Delivery
+100.0   100.0   0.0     VTE_4   Venous Thromboembolism Patients Receiving Unfractionated Heparin with Dosages/Platelet Count Monitoring by Protocol or Nomogram
+100.0   100.0   0.0     STK_5   Antithrombotic Therapy By End of Hospital Day 2
+100.0   100.0   0.0     SCIP_VTE_2      Surgery Patients Who Received Appropriate Venous Thromboembolism Prophylaxis Within 24 Hours Prior to Surgery to 24 Hours After Surgery
+
+However these results are suspicious.  A maximum value of 100 in some
+hospitals and 0 in others raises the following questions:
+1) Are the zero values correct?  Are there really some hospitals that scored
+0 or did someone fill in 0 thinking that this was a "Not Available" type
+answer?
+2) Have I made a mistake?  I have done some checking, particularly of the
+footnote field in the "Timely and Effective care" to see if we can recognize
+when a score should be ignored.  I did not find anything conclusive and so
+rather than getting stuck in analysis paralysis I have decided to accept the
+results.
+
+As a consequence the list above is not sufficient.  All entries have the 
+range 100 so we cannot really give the top 10 since there are several others 
+(5 more) that also have a range of 100.  These are now provided here and the
+query updated to select where the range is 100.
+
+Range	Maximum	Minimum	procedure	Procedure description
+100.0   100.0   0.0     STK_8   Stroke Education
+100.0   100.0   0.0     VTE_1   Venous Thromboembolism Prophylaxis
+100.0   100.0   0.0     VTE_2   Intensive Care Unit Venous Thromboembolism Prophylaxis
+100.0   100.0   0.0     IMM_2   Influenza Immunization
+100.0   100.0   0.0     HF_2    Evaluation of LVS Function
+100.0   100.0   0.0     OP_23   Head CT Scan Results for Acute Ischemic Stroke or Hemorrhagic Stroke Patients who Received Head CT or MRI Scan Interpretation Within 45 Minutes of ED Arrival
+100.0   100.0   0.0     PC_01   Elective Delivery
+100.0   100.0   0.0     VTE_4   Venous Thromboembolism Patients Receiving Unfractionated Heparin with Dosages/Platelet Count Monitoring by Protocol or Nomogram
+100.0   100.0   0.0     STK_5   Antithrombotic Therapy By End of Hospital Day 2
+100.0   100.0   0.0     SCIP_VTE_2      Surgery Patients Who Received Appropriate Venous Thromboembolism Prophylaxis Within 24 Hours Prior to Surgery to 24 Hours After Surgery
+100.0   100.0   0.0     SCIP_INF_1      Prophylactic Antibiotic Received Within 1 Hour Prior to Surgical Incision
+100.0   100.0   0.0     STK_4   Thrombolytic Therapy
+100.0   100.0   0.0     HF_1    Discharge Instructions
+100.0   100.0   0.0     STK_1   Venous Thromboembolism (VTE) Prophylaxis
+100.0   100.0   0.0     VTE_5   Venous Thromboembolism Warfarin Therapy Discharge Instructions

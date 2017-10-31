@@ -6,7 +6,10 @@ The Understanding:
 ------------------
 From this question I understand the following:
 - This time we are not concerned about how many procedures per hospital, we
-  want to aggregate all the scores for the state and get the average of them
+  want to aggregate all the scores for the state and get the mean of them
+
+Since the statename and the scores are in different tables this required a
+join to extract both sets of information in one query.
 
 The results are :
 
@@ -26,6 +29,6 @@ Utah has the highest mean score of all the states and has 1119 score records
 
 Some other observations:
 - The scores for each state are within a very small range, ignoring the
-  outliers the range was between 86% and 93.5%.
-  - To verify this I checked the average score in the procedures and
+  outliers the range from the worst to the best states was 86% to 93.5%.
+  - To verify this I checked the average score in all the procedures and
 	discovered that it is 92%

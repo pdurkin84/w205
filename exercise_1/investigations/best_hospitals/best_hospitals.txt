@@ -7,18 +7,18 @@ The Understanding:
 ------------------
 From this question I understand the following:
 - High quality care is having high mean score for all the procedures performed
-- Consistently implies over all procedures so:
-	- We must have more than one.  I have chosen 10 as the minimum number of
-	  procedures
-	- Consistently high implies there are no outliers that are low, so we are
-	  looking for hospitals who have a number of scores, all high.
+- Variety of procedures means more than one.  It's hard to equate variety with
+  a number but I chose 10.
+- Consistently high scores implies over all procedures at the hospital so
+	there are no outliers that are low.  We are looking for hospitals who have a 
+	number of scores (10), all high.  Here I chose all hospitals whose minimum
+	score is 85%.  I could also have used the range and depending on the
+	values chosen for the maximum range it could have altered the results.
 
 To find this I built a query that looks for the top 10 hospitals with:
 - the highest means score
 - have 10 or more procedures scored
 - the minimum score they have is 85%.  
-	- an alternative to this I could have done a range, that their highest
-	score was within 10-15% of their lowest score.
 
 The results are :
 

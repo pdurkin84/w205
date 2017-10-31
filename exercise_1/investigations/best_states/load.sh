@@ -46,7 +46,7 @@ fi
 
 for i in $FILE_LIST
 do
-	if [[ $i == *"hive.sql" -o HIVE_ONLY == "Y" ]]
+	if [[ $i == *"hive.sql" || HIVE_ONLY == "Y" ]]
 	then
 		echo "Hive file $i"
 		hive -f $i

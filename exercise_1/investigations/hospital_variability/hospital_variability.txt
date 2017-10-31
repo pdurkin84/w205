@@ -9,14 +9,14 @@ which procedures have the greatest variablility.  Since the procedures
 happen at hospitals and there is at most one score for each procedure
 per-hospital, between hospitals is implied.
 We are looking in this case for the largest range of values for particular
-procedures.
+procedures across the whole sets of scores.
 The query in this case is to calculate the difference between the maximum and
 minimum values for a procedure (independent of hospitals) and find the top 10
 with the biggest range
 
 The results are :
-Where the range column is the difference between the maximum score and the
-minimum score.
+Here the range column is the difference between the maximum and the minimum
+and is the variability in the procedure.
 
 Range	Maximum	Minimum	procedure	Procedure description
 100.0   100.0   0.0     STK_8   Stroke Education
@@ -36,7 +36,7 @@ hospitals and 0 in others raises the following questions:
 0 or did someone fill in 0 thinking that this was a "Not Available" type
 answer?
 2) Have I made a mistake?  I have done some checking, particularly of the
-footnote field in the "Timely and Effective care" to see if we can recognize
+footnote field in the "Timely and Effective care.csv" to see if I can recognize
 when a score should be ignored.  I did not find anything conclusive and so
 rather than getting stuck in analysis paralysis I have decided to accept the
 results.

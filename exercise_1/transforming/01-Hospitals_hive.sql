@@ -1,4 +1,4 @@
--- for my usage sicne I do not know the state abbreviations
+-- for my usage since I do not know the state abbreviations
 DROP TABLE StateNames;
 CREATE TABLE StateNames (stateName	STRING, stateAbbreviation	STRING);
 

@@ -10,13 +10,12 @@ The Gist:
 To easily run this have the following:
 	- CSV files readable in /data/Exercise1
 	- Directory $HOME exists and is writable, for logfile
-	- Directory $HOME/github/w205/exercise_1/loading_and_modelling/ exists and is 
-		writable, for SQL DDL file
+	- Directory $HOME exists and is writable, for SQL DDL file
 	- Directory /user/w205/ exists on an HDFS FS and is writable
 	- Hive installed and running
 
 Then run:
-	load_data_lake.sh -L -v
+	load_data_lake.sh
 
 This will copy all the CSV files from /data/Exercise1 removing the headers, to subfolders
 under /user/w205/hospital_compare/, one for each file.  Then it will create the file

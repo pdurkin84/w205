@@ -6,9 +6,17 @@ with patient survey responses?
 My Understanding:
 ------------------
 In this case we want to look for a correlation between:
-1) the mean hospital score and the survey response score
-2) the "procedural variability" (must be per-hospital as the survey responses
-are per-hospital) and the survey response score
+1) the hospital quality and the survey score.  I chose the columns/fields
+	- the hospital mean score as the best single value that represents the 
+		hospitals quality,
+	- the patientexperienceofcaredomain field from the survey table.  This
+		was discussed in the README.pdf as a good overall score from the 
+		patient survey
+2) the "procedural variability" agains the patient survey.  Since the patient
+	survey is per-hospital we must be required to look for procedural variability
+	within the hospitals (rather than variability for the same procedure between
+	hospitals) and so I chose the range in the HospitalScores table.  This is
+	correlated against the patientexperienceofcaredomain from the survey table.
 
 To do this we need two queries that use the builtin corr (correlation)
 function.

@@ -5,11 +5,14 @@ Which procedures have the greatest variability between hospitals?
 The Understanding:
 ------------------
 From this question I understand the following: We are being asked to find 
-which procedures have the greatest variablility.  Since the procedures 
-happen at hospitals and there is at most one score for each procedure
-per-hospital, between hospitals is implied.
-We are looking in this case for the largest range of values for particular
-procedures across the whole sets of scores.
+which procedures identified by a unique "measureid" have the greatest 
+variablility.
+
+Since the procedures happen at hospitals and there is at most one score for each 
+procedure per-hospital, between hospitals is implied (we do not have two scores
+for one procedure in a hospital).  So we are looking for the largest range of 
+values for specific procedures across the whole sets of scores.
+
 The query in this case is to calculate the difference between the maximum and
 minimum values for a procedure (independent of hospitals) and find the top 10
 with the biggest range

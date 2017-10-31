@@ -7,6 +7,16 @@ The Understanding:
 From this question I understand the following:
 - This time we are not concerned about how many procedures per hospital, we
   want to aggregate all the scores for the state and get the mean of them
+ 
+To do this I summed the total score calculated per-hospital with all the others
+in the same state and also summed the number of procedures.  Then I divided
+the total score by the number of procedures to get the mean score per-procedure
+in each state and ordered this result by the calculated means score.
+
+This process takes into account every procedure in every state and how well
+it is performed.  Taking the mean is the only fair way to do this as the 
+total score would be high for states with large numbers of hospitals and/or
+ones that report large numbers of procedues.
 
 Since the statename and the scores are in different tables this required a
 join to extract both sets of information in one query.

@@ -7,4 +7,15 @@
 --  - The number of scores each hospital submitted
 --	- The range of values for each hospital (max-min)
 
-CREATE TABLE HospitalScores AS SELECT AVG(score) AS mean, SUM(score) AS totalscore, MAX(score) AS maximum, MIN(score) AS minimum, COUNT(score) AS numprocedures, MAX(score)-MIN(score) AS range, providerid FROM ProcedureScores WHERE ProcedureScores.measureid IN (SELECT ProcedureScores.measureid FROM ProcedureScores) GROUP BY providerid;
+DROP TABLE HospitalScores;
+
+CREATE TABLE HospitalScores AS SELECT 
+	AVG(score) AS mean,
+	SUM(score) AS totalscore,
+	MAX(score) AS maximum,
+	MIN(score) AS minimum,
+	COUNT(score) AS numprocedures,
+	MAX(score)-MIN(score) AS range,
+	providerid AS providerid
+	FROM ProcedureScores 
+	WHERE ProcedureScores.measureid IN (SELECT ProcedureScores.measureid FROM ProcedureScores) GROUP BY providerid;

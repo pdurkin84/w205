@@ -1,34 +1,36 @@
 -- Load the Survey table removing all the "out of 9" and "out of 10" leaving just the scores
 -- Also some aggregate columns
-create table if not exists Survey as select
-    providernumber as providerid,
-    cast(regexp_extract(communicationwithnursesachievementpoints,'(.*?) out of.*',1) as int) as communicationwithnursesachievementpoints,
-    cast(regexp_extract(communicationwithnursesimprovementpoints,'(.*?) out of.*',1) as int) as communicationwithnursesimprovementpoints,
-    cast(regexp_extract(communicationwithnursesdimensionscore,'(.*?) out of.*',1) as int) as communicationwithnursesdimensionscore,
-    cast(regexp_extract(communicationwithdoctorsachievementpoints,'(.*?) out of.*',1) as int) as communicationwithdoctorsachievementpoints,
-    cast(regexp_extract(communicationwithdoctorsimprovementpoints,'(.*?) out of.*',1) as int) as communicationwithdoctorsimprovementpoints,
-    cast(regexp_extract(communicationwithdoctorsdimensionscore,'(.*?) out of.*',1) as int) as communicationwithdoctorsdimensionscore,
-    cast(regexp_extract(responsivenessofhospitalstaffachievementpoints,'(.*?) out of.*',1) as int) as responsivenessofhospitalstaffachievementpoints,
-    cast(regexp_extract(responsivenessofhospitalstaffimprovementpoints,'(.*?) out of.*',1) as int) as responsivenessofhospitalstaffimprovementpoints,
-    cast(regexp_extract(responsivenessofhospitalstaffdimensionscore,'(.*?) out of.*',1) as int) as responsivenessofhospitalstaffdimensionscore,
-    cast(regexp_extract(painmanagementachievementpoints,'(.*?) out of.*',1) as int) as painmanagementachievementpoints,
-    cast(regexp_extract(painmanagementimprovementpoints,'(.*?) out of.*',1) as int) as painmanagementimprovementpoints,
-    cast(regexp_extract(painmanagementdimensionscore,'(.*?) out of.*',1) as int) as painmanagementdimensionscore,
-    cast(regexp_extract(communicationaboutmedicinesachievementpoints,'(.*?) out of.*',1) as int) as communicationaboutmedicinesachievementpoints,
-    cast(regexp_extract(communicationaboutmedicinesimprovementpoints,'(.*?) out of.*',1) as int) as communicationaboutmedicinesimprovementpoints,
-    cast(regexp_extract(communicationaboutmedicinesdimensionscore,'(.*?) out of.*',1) as int) as communicationaboutmedicinesdimensionscore,
-    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentachievementpoints,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentachievementpoints,
-    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentimprovementpoints,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentimprovementpoints,
-    cast(regexp_extract(cleanlinessandquietnessofhospitalenvironmentdimensionscore,'(.*?) out of.*',1) as int) as cleanlinessandquietnessofhospitalenvironmentdimensionscore,
-    cast(regexp_extract(dischargeinformationachievementpoints,'(.*?) out of.*',1) as int) as dischargeinformationachievementpoints,
-    cast(regexp_extract(dischargeinformationimprovementpoints,'(.*?) out of.*',1) as int) as dischargeinformationimprovementpoints,
-    cast(regexp_extract(dischargeinformationdimensionscore,'(.*?) out of.*',1) as int) as dischargeinformationdimensionscore,
-    cast(regexp_extract(overallratingofhospitalachievementpoints,'(.*?) out of.*',1) as int) as overallratingofhospitalachievementpoints,
-    cast(regexp_extract(overallratingofhospitalimprovementpoints,'(.*?) out of.*',1) as int) as overallratingofhospitalimprovementpoints,
-    cast(regexp_extract(overallratingofhospitaldimensionscore,'(.*?) out of.*',1) as int) as overallratingofhospitaldimensionscore,
-    cast(hcahpsbasescore as int) as hcahpsbasescore,
-    cast(hcahpsconsistencyscore as int) as hcahpsconsistencyscore,
-    -- May be useful as a comparison against the mean scores for the hospital
-    hcahpsbasescore/80 as hcahpsbasescoremean,
-	(hcahpsbasescore + hcahpsconsistencyscore) as PatientExperienceOfCareDomain
-from hvbp_hcahps_05_28_2015;
+DROP TABLE SURVEY;
+CREATE TABLE Survey AS SELECT
+    providernumber AS providerid,
+    CAST(REGEXP_EXTRACT(communicationwithnursesachievementpoints,'(.*?) out of.*',1) AS int) AS communicationwithnursesachievementpoints,
+    CAST(REGEXP_EXTRACT(communicationwithnursesimprovementpoints,'(.*?) out of.*',1) AS int) AS communicationwithnursesimprovementpoints,
+    CAST(REGEXP_EXTRACT(communicationwithnursesdimensionscore,'(.*?) out of.*',1) AS int) AS communicationwithnursesdimensionscore,
+    CAST(REGEXP_EXTRACT(communicationwithdoctorsachievementpoints,'(.*?) out of.*',1) AS int) AS communicationwithdoctorsachievementpoints,
+    CAST(REGEXP_EXTRACT(communicationwithdoctorsimprovementpoints,'(.*?) out of.*',1) AS int) AS communicationwithdoctorsimprovementpoints,
+    CAST(REGEXP_EXTRACT(communicationwithdoctorsdimensionscore,'(.*?) out of.*',1) AS int) AS communicationwithdoctorsdimensionscore,
+    CAST(REGEXP_EXTRACT(responsivenessofhospitalstaffachievementpoints,'(.*?) out of.*',1) AS int) AS responsivenessofhospitalstaffachievementpoints,
+    CAST(REGEXP_EXTRACT(responsivenessofhospitalstaffimprovementpoints,'(.*?) out of.*',1) AS int) AS responsivenessofhospitalstaffimprovementpoints,
+    CAST(REGEXP_EXTRACT(responsivenessofhospitalstaffdimensionscore,'(.*?) out of.*',1) AS int) AS responsivenessofhospitalstaffdimensionscore,
+    CAST(REGEXP_EXTRACT(painmanagementachievementpoints,'(.*?) out of.*',1) AS int) AS painmanagementachievementpoints,
+    CAST(REGEXP_EXTRACT(painmanagementimprovementpoints,'(.*?) out of.*',1) AS int) AS painmanagementimprovementpoints,
+    CAST(REGEXP_EXTRACT(painmanagementdimensionscore,'(.*?) out of.*',1) AS int) AS painmanagementdimensionscore,
+    CAST(REGEXP_EXTRACT(communicationaboutmedicinesachievementpoints,'(.*?) out of.*',1) AS int) AS communicationaboutmedicinesachievementpoints,
+    CAST(REGEXP_EXTRACT(communicationaboutmedicinesimprovementpoints,'(.*?) out of.*',1) AS int) AS communicationaboutmedicinesimprovementpoints,
+    CAST(REGEXP_EXTRACT(communicationaboutmedicinesdimensionscore,'(.*?) out of.*',1) AS int) AS communicationaboutmedicinesdimensionscore,
+    CAST(REGEXP_EXTRACT(cleanlinessandquietnessofhospitalenvironmentachievementpoints,'(.*?) out of.*',1) AS int) AS cleanlinessandquietnessofhospitalenvironmentachievementpoints,
+    CAST(REGEXP_EXTRACT(cleanlinessandquietnessofhospitalenvironmentimprovementpoints,'(.*?) out of.*',1) AS int) AS cleanlinessandquietnessofhospitalenvironmentimprovementpoints,
+    CAST(REGEXP_EXTRACT(cleanlinessandquietnessofhospitalenvironmentdimensionscore,'(.*?) out of.*',1) AS int) AS cleanlinessandquietnessofhospitalenvironmentdimensionscore,
+    CAST(REGEXP_EXTRACT(dischargeinformationachievementpoints,'(.*?) out of.*',1) AS int) AS dischargeinformationachievementpoints,
+    CAST(REGEXP_EXTRACT(dischargeinformationimprovementpoints,'(.*?) out of.*',1) AS int) AS dischargeinformationimprovementpoints,
+    CAST(REGEXP_EXTRACT(dischargeinformationdimensionscore,'(.*?) out of.*',1) AS int) AS dischargeinformationdimensionscore,
+    CAST(REGEXP_EXTRACT(overallratingofhospitalachievementpoints,'(.*?) out of.*',1) AS int) AS overallratingofhospitalachievementpoints,
+    CAST(REGEXP_EXTRACT(overallratingofhospitalimprovementpoints,'(.*?) out of.*',1) AS int) AS overallratingofhospitalimprovementpoints,
+    CAST(REGEXP_EXTRACT(overallratingofhospitaldimensionscore,'(.*?) out of.*',1) AS int) AS overallratingofhospitaldimensionscore,
+    CAST(hcahpsbasescore AS int) AS hcahpsbasescore,
+    CAST(hcahpsconsistencyscore AS int) AS hcahpsconsistencyscore,
+    -- May be useful AS a comparison against the mean scores for the hospital
+    hcahpsbasescore/80 AS hcahpsbasescoremean,
+	(hcahpsbasescore + hcahpsconsistencyscore) AS PatientExperienceOfCareDomain
+	FROM hvbp_hcahps_05_28_2015
+	WHERE hcahpsbasescore is not null AND hcahpsbasescore <> '' AND hcahpsconsistencyscore is not null AND hcahpsconsistencyscore <> '';

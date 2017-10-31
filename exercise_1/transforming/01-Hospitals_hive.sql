@@ -1,4 +1,5 @@
 -- for my usage sicne I do not know the state abbreviations
+DROP TABLE StateNames;
 CREATE TABLE StateNames (stateName	STRING, stateAbbreviation	STRING);
 
 INSERT INTO TABLE StateNames
@@ -64,6 +65,7 @@ SELECT "Virgin Islands","VI";
 
 -- Join the Hospitals with the state name so that I can do a SELECT from it using the statename rather than
 -- the two digit abbreviation
+DROP TABLE Hospitals;
 CREATE TABLE Hospitals as SELECT 
 	hospitalgeneralinformation.providerid,
 	hospitalgeneralinformation.hospitalname,

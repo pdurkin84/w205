@@ -1,0 +1,10 @@
+The Question:
+-------------
+Are average scores for hospital quality or procedural variability correlated
+with patient survey responses?
+
+My Understanding:
+------------------
+In this case we want to compare the average score for each hospital with the
+survey total score 
+

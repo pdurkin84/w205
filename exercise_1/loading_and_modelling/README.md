@@ -19,8 +19,7 @@ Then run:
 
 This will copy all the CSV files from /data/Exercise1 removing the headers, to subfolders
 under /user/w205/hospital_compare/, one for each file.  Then it will create the file
-$HOME/github/w205/exercise_1/loading_and_modelling/hive_base_ddl.sql with the DDL
-for each of these files and load them into hive.
+$HOME/hive_base_ddl.sql with the DDL for each of these files and load them into hive.
 
 If any variation is required see the details below or run "load_data_lake.sh -?"
 

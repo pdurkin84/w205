@@ -8,16 +8,16 @@ from streamparse.bolt import Bolt
 class WordCounter(Bolt):
 
     def initialize(self, conf, ctx):
+# Pauld: code added here
 	self.conn = psycopg2.connect( database="tcount", user="postgres", password="pass", host="localhost", port="5432")
 	self.cur = self.conn.cursor()
-        self.counts = Counter()
+#        self.counts = Counter()
+# end of changes
 
     def process(self, tup):
         word = tup.values[0]
 
-# My code
-#	myConnection = psycopg2.connect( database="tcount", user="postgres", password="pass", host="localhost", port="5432")
-#	cur = myConnection.cursor()
+# Pauld: code added here
 	self.cur.execute( "SELECT count FROM tweetwordcount WHERE word =%s",(word,))
 	if self.cur.rowcount == 0:
 		self.cur.execute("INSERT INTO tweetwordcount (word,count) VALUES (%s, 1)", (word,));
@@ -29,14 +29,9 @@ class WordCounter(Bolt):
 		self.cur.execute("UPDATE tweetwordcount SET count=%s WHERE word=%s", (curval, word))
 	
 	self.conn.commit()
+# end of changes
 
-# End my code
-        # Write codes to increment the word count in Postgres
-        # Use psycopg to interact with Postgres
-        # Database name: Tcount 
-        # Table name: Tweetwordcount 
-        # you need to create both the database and the table in advance.
-        
+# Pauld: removed everything after this point
 #
 #        # Increment the local count
 #        self.counts[word] += 1

@@ -20,14 +20,18 @@ class WordCounter(Bolt):
 # Pauld: code added here
 	self.cur.execute( "SELECT count FROM tweetwordcount WHERE word =%s",(word,))
 	if self.cur.rowcount == 0:
-		self.cur.execute("INSERT INTO tweetwordcount (word,count) VALUES (%s, 1)", (word,));
+		print ("Pauld, 0 row returned for %s" % (word))
+		try:
+			self.cur.execute("INSERT INTO tweetwordcount (word,count) VALUES (%s, 1)", (word,));
+		except psycopg2.IntegrityError:
+  			print("Race condition, ignoring when return from select is 0 but attempt to add fails")
 	elif self.cur.rowcount != 1:
 		print ("error, more than one row returned for %s" % (word))
 	else:
 		curval = self.cur.fetchone()[0]
 		curval += 1
 		self.cur.execute("UPDATE tweetwordcount SET count=%s WHERE word=%s", (curval, word))
-	
+
 	self.conn.commit()
 # end of changes
 

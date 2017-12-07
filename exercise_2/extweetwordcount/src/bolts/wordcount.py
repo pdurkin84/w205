@@ -28,9 +28,11 @@ class WordCounter(Bolt):
 	elif self.cur.rowcount != 1:
 		print ("error, more than one row returned for %s" % (word))
 	else:
-		curval = self.cur.fetchone()[0]
-		curval += 1
-		self.cur.execute("UPDATE tweetwordcount SET count=%s WHERE word=%s", (curval, word))
+		#curval = self.cur.fetchone()[0]
+		#curval += 1
+		#self.cur.execute("UPDATE tweetwordcount SET count=%s WHERE word=%s", (curval, word))
+		# this is better, no need to calculate the value just have the database increment the field
+		self.cur.execute("UPDATE tweetwordcount SET count=count+1 WHERE word=%s", (word,))
 
 	self.conn.commit()
 # end of changes
